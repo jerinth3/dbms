@@ -1,0 +1,74 @@
+Aim : Design and Develop MongoDB Queries using CRUD operations. (Use CRUD operations, SAVE
+method, logical operators)
+Problem Statement:
+
+
+NOTE : Replace XYZ by your own collection name
+
+
+1. Create Collection Employee
+In MongoDB, collections are created automatically when you insert your first document. So, no explicit
+"create" command is needed.
+
+-> db.createCollection("XYZ")
+
+
+2. Insert 5 documents to Employee
+
+-> db.XYZ.insertMany([{name: "Virat Kohli", age: 34}, {name: "Rohit Sharma", age: 37}, {name: "KL Rahul", age: 31}, {name: "Rishabh Pant", age: 27}])
+
+3. Read all the documents
+
+-> db.XYZ.find()
+
+4. Display all the documents in a formatted manner
+
+-> db.XYZ.find().pretty()
+
+5. Insert another 3 documents with a single insert command
+
+-> db.XYZ.insertMany([{name: "Shreyas Iyer", age: 30}, {name: "Gautam Gambhir", age: 41}, {name: "Ravi Shastri", age: 60}])
+
+7. Read all the employees whose name is „Joe‟ and age is 25
+
+-> db.XYZ.find({name : "Joe", age: 25})
+
+8. Read all the employees whose salary is greater than 5000
+
+-> db.XYZ.find({salary : {$gt : 5000}})
+
+
+9. Update the department of employee "Joe" from "Production" to "Operations"
+
+-> db.XYZ.updateOne({name: "Joe", department: "Production"}, {$set : {department : "Operations"}})
+
+10. Increment the salary of "Joe" by Rs. 2000
+
+-> db.XYZ.updateOne({name: "Joe"}, {$inc : {salary : 2000} } )
+
+11. Add email Id for "Joe" (using $AddToSet modifier with update)
+
+-> db.XYZ.updateOne({name: "Joe"}, {$addToSet : {email : "joe@gmail.com"}} )
+
+12. Remove all the documents for the employees belonging to „Operations‟ department
+
+-> db.XYZ.deleteMany({department: "Operations"})
+
+13. Sort all the documents according to the name of employees
+
+-> db.XYZ.find().sort({name : 1})
+
+14. Display only first three documents
+
+-> db.XYZ.find().limit(3)
+
+15. Display all the documents except first 4
+
+-> db.XYZ.find().skip(4)
+
+16. Use all the administrative commands of MongoDB
+
+-> show dbs
+-> use dbs
+-> db.XYZ.stats()
+

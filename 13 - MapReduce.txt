@@ -1,0 +1,40 @@
+Aim : Implement Map Reduce operation with suitable example using MongoDB.
+Problem Statement:
+1. Create collection Staff with keys name, age and address
+
+-> db.createCollection("Staff");
+
+db.Staff.insertMany([
+  { name: "Hardik", age: 25, address: "Pune" },
+  { name: "Vinay", age: 30, address: "Indore" },
+  { name: "Vishal", age: 35, address: "Hyderabad" },
+  { name: "Ashok", age: 28, address: "Mumbai" },
+  { name: "Aditya", age: 22, address: "Bangalore" }
+]);
+
+2. Apply Map Reduce operation over Staff collection to display the name of staff and sum of ages of the staff
+having same name.
+
+-> 
+Map Function :
+____________________________________________
+
+var mapFunction = function() {
+  emit(this.name, this.age);
+};
+_____________________________________________
+
+Reduce Function : 
+_____________________________________________
+
+var reduceFunction = function(key, values) {
+  return Array.sum(values);  // Sum the ages
+};
+_____________________________________________
+
+db.Staff.mapReduce(
+  mapFunction,
+  reduceFunction,
+  { out: "staff_age_summary" }
+);
+
